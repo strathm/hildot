@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Feedback | Spare Parts and Farm Equipment{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center">We Value Your Feedback</h1>
+    <p class="text-center">Please share your thoughts with us so we can improve our services!</p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form action="/submit-feedback" method="POST">
+                <!-- Customer Name (Optional) -->
+                <div class="form-group">
+                    <label for="name">Your Name (Optional)</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name (optional)">
+                </div>
+
+                <!-- Customer Email -->
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <!-- Feedback Type -->
+                <div class="form-group">
+                    <label for="feedback_type">Feedback Type</label>
+                    <select class="form-control" id="feedback_type" name="feedback_type" required>
+                        <option value="Product">Product</option>
+                        <option value="Service">Service</option>
+                        <option value="Website">Website</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Feedback Message -->
+                <div class="form-group">
+                    <label for="message">Your Feedback</label>
+                    <textarea class="form-control" id="message" name="message" rows="4" placeholder="Write your feedback here" required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-block">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

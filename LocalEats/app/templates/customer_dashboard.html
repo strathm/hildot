@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | Food Delivery System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card-hover:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+        .dashboard-section {
+            margin-top: 30px;
+        }
+        .greeting {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="container dashboard-section">
+        <div class="greeting mb-4">Welcome, {{ current_user.name }}!</div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-hover shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-utensils fa-3x mb-3 text-primary"></i>
+                        <h5 class="card-title">Browse Restaurants</h5>
+                        <p class="card-text">Discover new places and order your favorite dishes.</p>
+                        <a href="{{ url_for('main.home') }}" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-hover shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-shopping-cart fa-3x mb-3 text-success"></i>
+                        <h5 class="card-title">View Orders</h5>
+                        <p class="card-text">Track your orders and manage past purchases.</p>
+                        <a href="#" class="btn btn-success">My Orders</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-hover shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-star fa-3x mb-3 text-warning"></i>
+                        <h5 class="card-title">Submit Reviews</h5>
+                        <p class="card-text">Share your experience with restaurants and meals.</p>
+                        <a href="#" class="btn btn-warning text-white">Write Review</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

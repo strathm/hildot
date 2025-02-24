@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>View Request: {{ request.name }}</h1>
+    
+    <table class="table table-bordered">
+        <tr>
+            <th>Item Name</th>
+            <td>{{ request.name }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ request.description if request.description else 'No description provided' }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ request.status }}</td>
+        </tr>
+        <tr>
+            <th>User</th>
+            <td>{{ request.user.username }}</td>  <!-- Accessing related User -->
+        </tr>
+        <tr>
+            <th>Requested On</th>
+            <td>{{ request.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+        </tr>
+    </table>
+
+    <!-- Optionally, you can add options to update or fulfill the request -->
+    <a href="{{ url_for('main.manage_requests') }}" class="btn btn-secondary">Back to Requests</a>
+{% endblock %}

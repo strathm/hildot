@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Select Products for Customer{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Select Products for Customer</h2>
+    <form method="POST" action="{{ url_for('main.select_items') }}">
+        {{ form.hidden_tag() }}
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Price (Ksh)</th>
+                        <th>Available Quantity</th>
+                        <th>Quantity to Pick</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="product_ids[]" value="{{ product.id }}">
+                        </td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>
+                            <input type="number" name="quantities[]" class="form-control" min="1" max="{{ product.quantity }}" value="1">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Selection</button>
+    </form>
+</div>
+{% endblock %}

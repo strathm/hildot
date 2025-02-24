@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} | Product Details{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='uploads/' + (product.image if product.image else 'default_image.jpg')) }}" 
+                 alt="{{ product.name }}" class="img-fluid rounded shadow">
+        </div>
+
+        <!-- Product Information -->
+        <div class="col-md-6">
+            <h2 class="mb-3">{{ product.name }}</h2>
+            <p class="text-muted">{{ product.description }}</p>
+            <h4 class="text-danger font-weight-bold">Ksh {{ product.price }}</h4>
+            
+            {% if product.quantity > 0 %}
+                <p class="text-success"><i class="fas fa-check-circle"></i> In Stock</p>
+            {% else %}
+                <p class="text-danger"><i class="fas fa-times-circle"></i> Out of Stock</p>
+            {% endif %}
+
+<!-- Add to Cart Button -->
+<form action="{{ url_for('main.add_to_cart', product_id=product.id) }}" method="POST">
+    {{ form.hidden_tag() }}  <!-- Add CSRF token here -->
+    <div class="input-group mb-3 w-50">
+        <input type="number" name="quantity" class="form-control" value="1" min="1" max="{{ product.quantity }}">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+        </div>
+    </div>
+</form>
+
+
+            <!-- Back to Products Button -->
+            <a href="{{ url_for('main.home') }}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Back to Products</a>
+        </div>
+    </div>
+</div>
+
+<!-- Custom CSS -->
+<style>
+    .img-fluid {
+        max-height: 450px;
+        object-fit: cover;
+    }
+</style>
+{% endblock %}

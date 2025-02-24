@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<!-- Registration Section -->
+<section class="registration-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <h2 class="text-center mb-4">Create Your Account</h2>
+                
+                <!-- Registration Form -->
+                <form method="POST" action="{{ url_for('main.register') }}">
+                    {{ form.hidden_tag() }}
+                    
+                    <!-- full_name -->
+                    <div class="form-group">
+                        <label for="full_name">Full Name</label>
+                        {{ form.full_name(class="form-control", placeholder="Enter your full name") }}
+                        {% for error in form.full_name.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        {{ form.phone_number(class="form-control", placeholder="Enter your phone number") }}
+                        {% for error in form.phone_number.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- National ID -->
+                    <div class="form-group">
+                        <label for="national_id">National ID</label>
+                        {{ form.national_id(class="form-control", placeholder="Enter your National ID") }}
+                        {% for error in form.national_id.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Occupation -->
+                    <div class="form-group">
+                        <label for="occupation">Occupation</label>
+                        {{ form.occupation(class="form-control", placeholder="Enter your occupation") }}
+                        {% for error in form.occupation.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Location Fields -->
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="county">County</label>
+                            {{ form.county(class="form-control") }}
+                            {% for error in form.county.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="sub_county">Sub-County</label>
+                            {{ form.sub_county(class="form-control") }}
+                            {% for error in form.sub_county.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="village_street">Village/Street</label>
+                            {{ form.village_street(class="form-control") }}
+                            {% for error in form.village_street.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Date of Birth -->
+                    <div class="form-group">
+                        <label for="date_of_birth">Date of Birth</label>
+                        {{ form.date_of_birth(class="form-control", placeholder="Select your date of birth") }}
+                        {% for error in form.date_of_birth.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        {{ form.password(class="form-control", placeholder="Enter your password") }}
+                        {% for error in form.password.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
+                        {% for error in form.confirm_password.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-3">
+                    <p>Already have an account? <a href="{{ url_for('main.login') }}">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+food_ordering_system/
+│
+├── app/
+│   ├── __init__.py                     # Application factory setup
+│   ├── models.py                        # All database models (SQLAlchemy ORM)
+│   ├── routes.py                        # All application routes
+│   ├── forms.py                         # WTForms for input validation (Restaurant, Customer, Menu, Order, Registration, Login)
+│   ├── services/
+│   │   ├── auth_service.py              # Authentication and Authorization logic
+│   │   ├── restaurant_service.py        # Restaurant management logic
+│   │   ├── customer_service.py          # Customer management logic
+│   │   ├── menu_service.py              # Menu & Item management logic
+│   │   ├── order_service.py             # Order processing, status updates, tracking
+│   │   ├── location_service.py          # Location verification, Google Maps API, zone validation
+│   │   ├── notification_service.py      # Notifications (Email, SMS, Push)
+│   │   ├── payment_service.py           # M-Pesa, PayPal, Stripe payment handling
+│   │   ├── tracking_service.py          # Order live tracking service (WebSocket/Status Flow)
+│   │   └── delivery_service.py          # Delivery assignment, order dispatch, rider management (future extension)
+│   ├── utils/
+│   │   ├── validators.py                 # Custom validators for forms & data validation
+│   │   ├── jwt_handler.py                # JWT authentication and token management
+│   │   ├── error_handler.py              # Error handlers for custom responses
+│   │   ├── response_helper.py            # Helper to structure JSON API responses
+│   │   └── logger.py                     # Logging setup (file & console logging)
+│   ├── templates/
+│   │   ├── base.html                     # Base template layout
+│   │   ├── index.html                    # Home page (Landing Page)
+│   │   ├── restaurant_dashboard.html     # Restaurant management panel
+│   │   ├── customer_dashboard.html       # Customer dashboard
+│   │   ├── menu_list.html                # Menu viewing page
+│   │   ├── order_tracking.html           # Order status and live tracking
+│   │   ├── order_details.html            # Detailed order view
+│   │   ├── registration.html             # Registration form page (Customer/Restaurant)
+│   │   ├── login.html                    # Login form page
+│   │   └── payment_success.html          # Payment confirmation page
+│   ├── static/
+│   │   ├── css/                          # Stylesheets
+│   │   ├── js/                           # JavaScript files (Order Tracking, Live Updates)
+│   │   └── images/                       # Static images and icons
+│
+├── migrations/                           # Database migrations (Flask-Migrate)
+│
+├── config.py                              # Configuration file (DB, API keys, secrets)
+├── requirements.txt                       # Python dependencies
+├── run.py                                 # Entry point to run the Flask application
+├── README.md                              # Documentation
+├── tests/                                 # Unit and Integration tests
+│   ├── test_auth.py
+│   ├── test_restaurant.py
+│   ├── test_customer.py
+│   ├── test_menu.py
+│   ├── test_order.py
+│   └── test_tracking.py

@@ -1,0 +1,29 @@
+<!-- templates/admin/view_user.html -->
+{% extends 'base.html' %}
+
+{% block title %}User Details | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center">User Details for {{ user.username }}</h1>
+
+    <h3>Personal Information:</h3>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+    <p><strong>Joined:</strong> {{ user.created_at }}</p>
+
+    <h3 class="mt-4">Orders Made by User:</h3>
+    <ul class="list-group">
+        {% for order in user.orders %}
+            <li class="list-group-item">
+                <strong>Order ID {{ order.id }}</strong> - Total: ${{ order.total_price }} - Status: {{ order.status }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="mt-4 text-center">
+        <a href="/admin/manage-users" class="btn btn-secondary">Back to Users</a>
+    </div>
+</div>
+{% endblock %}

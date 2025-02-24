@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Request an Item | Spare Parts and Farm Equipment{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center">Request an Item</h1>
+    <p class="text-center">If you can't find the item you're looking for, let us know, and we'll try to source it for you!</p>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Flask-WTF Form -->
+            <form method="POST" action="{{ url_for('main.request_item') }}">
+                {{ form.hidden_tag() }}
+
+                <!-- Item Name -->
+                <div class="form-group">
+                    <label for="name">Item Name</label>
+                    {{ form.name(class="form-control", placeholder="Enter the name of the item") }}
+                    {% if form.name.errors %}
+                        <small class="text-danger">{{ form.name.errors[0] }}</small>
+                    {% endif %}
+                </div>
+
+                <!-- Item Description -->
+                <div class="form-group">
+                    <label for="description">Item Description</label>
+                    {{ form.description(class="form-control", placeholder="Describe the item you're requesting", rows="4") }}
+                    {% if form.description.errors %}
+                        <small class="text-danger">{{ form.description.errors[0] }}</small>
+                    {% endif %}
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

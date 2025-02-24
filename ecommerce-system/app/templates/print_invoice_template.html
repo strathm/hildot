@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'Receipt' if is_paid else 'Invoice' }} - Document {{ document_number }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .text-right { text-align: right; }
+    </style>
+</head>
+<body>
+    <h2>{{ 'Receipt' if is_paid else 'Invoice' }} - Document Number: {{ document_number }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price (Ksh)</th>
+                <th>Quantity</th>
+                <th>Subtotal (Ksh)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in selected_items %}
+            <tr>
+                <td>{{ item.product_name }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price * item.quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-right"><strong>Grand Total (Ksh)</strong></td>
+                <td><strong>{{ grand_total }}</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+    <p>Printed on: {{ current_time }}</p>
+</body>
+</html>

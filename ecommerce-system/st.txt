@@ -1,0 +1,49 @@
+ecommerce-system/
+│
+├── app/
+│   ├── __init__.py              # Flask application factory
+│   ├── models.py                # Database models
+│   ├── routes.py                # All application routes (admin, customer, etc.)
+│   ├── forms.py                 # Flask-WTF forms
+│   ├── utils.py                 # Utility functions (e.g., image handling, calculations)
+│   ├── config.py                # Configuration settings for different environments
+│   ├── static/                  # Static files (CSS, JS, images)
+│   │   ├── css/                 # CSS files
+│   │   │   ├── main.css
+│   │   ├── js/                  # JavaScript files
+│   │   │   ├── main.js
+│   │   ├── images/              # Image files (product images, logos, etc.)
+│   ├── templates/               # HTML templates
+│   │   ├── base.html            # Shared base template
+│   │   ├── error.html           # Error pages
+│   │   ├── admin_dashboard.html # Admin dashboard
+│   │   ├── add_product.html     # Admin add product page
+│   │   ├── low_stock_alert.html # Admin low stock alerts page
+│   │   ├── home.html            # Customer homepage
+│   │   ├── product_detail.html  # Product details page
+│   │   ├── request_item.html    # Request item page
+│   │   ├── feedback.html        # Feedback page
+│   │   ├── cart.html            # Shopping cart page
+│   │   ├── login.html           # Login page
+│   │   ├── register.html        # Registration page
+│   │   ├── admin_dashboard.html # Admin dashboard page
+│   ├── migrations/              # Database migration files (handled by Flask-Migrate)
+│   ├── tests/                   # Unit tests
+│   │   ├── test_routes.py       # Test routes (endpoints)
+│   │   ├── test_models.py       # Test database models
+├── .env                         # Environment variables (database URL, email credentials, etc.)
+├── requirements.txt             # Python dependencies (Flask, Flask-WTF, SQLAlchemy, etc.)
+├── run.py                       # Entry point for running the app
+├── config.py                    # Config file for different environments (development, production, etc.)
+
+
+
+flask create-admin <username> <email> <password> <county> <subcounty> <street>
+flask create-admin admin_user admin@example.com adminpassword Kenya Nairobi Madaraka
+
+
+
+
+flask create-admin john_doe john@example.com password123 Nairobi Westlands 'Main Street' --role=admin
+flask create-admin jane_seller jane@example.com sellerpass Nairobi Kasarani 'Market Road' --role=seller
+

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Food Delivery System{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-5 rounded-4 card-glass" style="max-width: 500px; width: 100%; animation: slideIn 0.8s ease-in-out;">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary-gradient">Create Your Account</h2>
+            <p class="text-muted">Join us and start ordering delicious meals!</p>
+        </div>
+
+        <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold"><i class="fas fa-user"></i> Full Name</label>
+                {{ form.name(class="form-control form-control-lg rounded-pill", placeholder="John Doe") }}
+                {% for error in form.name.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold"><i class="fas fa-envelope"></i> Email Address</label>
+                {{ form.email(class="form-control form-control-lg rounded-pill", placeholder="example@domain.com") }}
+                {% for error in form.email.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold"><i class="fas fa-lock"></i> Password</label>
+                {{ form.password(class="form-control form-control-lg rounded-pill", placeholder="Create a password") }}
+                {% for error in form.password.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold"><i class="fas fa-check-circle"></i> Confirm Password</label>
+                {{ form.confirm_password(class="form-control form-control-lg rounded-pill", placeholder="Confirm password") }}
+                {% for error in form.confirm_password.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold"><i class="fas fa-user-tag"></i> Role</label>
+                {{ form.role(class="form-select form-select-lg rounded-pill") }}
+                {% for error in form.role.errors %}
+                <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-gradient w-100 py-3 fw-semibold rounded-pill shadow-sm">
+                <i class="fas fa-user-plus me-2"></i> Register
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <p class="small text-muted">Already have an account? <a href="{{ url_for('main.login') }}" class="text-primary fw-semibold text-decoration-none">Login here</a></p>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #1d3557, #457b9d, #2a9d8f);
+        background-size: 200% 200%;
+        animation: gradientBG 8s ease infinite;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .card-glass {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-gradient {
+        background: linear-gradient(135deg, #457b9d, #1d3557);
+        color: #ffffff;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-gradient:hover {
+        background: linear-gradient(135deg, #1d3557, #457b9d);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .text-primary-gradient {
+        background: linear-gradient(45deg, #1d3557, #457b9d);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .form-control-lg, .form-select-lg {
+        font-size: 1rem;
+        padding: 12px 18px;
+    }
+</style>
+{% endblock %}

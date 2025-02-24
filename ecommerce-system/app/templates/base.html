@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hildot{% endblock %}</title>
+    
+    <!-- Bootstrap CSS (CDN) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome (For Icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts (Typography) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+    <!-- Enhanced Styles -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Roboto', sans-serif;
+            background: #f8f9fa;
+        }
+        .container {
+            flex: 1;
+        }
+        /* Navbar Enhancements */
+        .navbar {
+            transition: all 0.3s ease-in-out;
+        }
+        .navbar.scrolled {
+            background: rgba(0, 123, 255, 0.9) !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        /* Footer Styles */
+        footer {
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #007bff, #6610f2);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        footer a {
+            color: white;
+            margin: 0 10px;
+            transition: color 0.3s ease-in-out;
+        }
+        footer a:hover {
+            color: #ffcc00;
+        }
+        .social-icons i {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Store Logo" width="50" height="50">
+            Hildot
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+
+                <!-- Category Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                        Categories
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ url_for('main.home') }}">All Categories</a>
+                        {% for category in categories %}
+                            <a class="dropdown-item" href="{{ url_for('main.home', category=category.id) }}">{{ category.name }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+              <!--  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}-->
+
+
+                {% if current_user.is_authenticated %}
+                    {% if current_user.is_admin %}
+                        <!-- Admin (Shop Owner) Links -->
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.admin_dashboard') }}">Dashboard</a></li>
+                        <!--<li class="nav-item"><a class="nav-link" href="{{ url_for('main.manage_products') }}">Manage Products</a></li> -->
+                        <!--<li class="nav-item"><a class="nav-link" href="{{ url_for('main.view_orders') }}">Manage Orders</a></li>-->
+                        
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.manage_sellers') }}">Manage Sellers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.view_sold_items') }}">Sold Items Report</a></li>
+                        
+                    {% elif current_user.is_seller %}
+                        <!-- Seller Links -->
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.seller_dashboard') }}">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.manage_products') }}">Manage Stock</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.view_orders') }}">Process Orders</a></li>
+                    {% else %}
+                        <!-- Customer Links -->
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.shop') }}">Shop</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.view_orders') }}">My Orders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.profile') }}">Profile</a></li>
+                    {% endif %}
+
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link position-relative" href="{{ url_for('main.cart') }}">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        {% if session['cart'] and session['cart']|length > 0 %}
+                            <span class="badge badge-danger position-absolute top-0 start-100 translate-middle">
+                                {{ session['cart']|length }}
+                            </span>
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Main Content -->
+    <div class="container my-5 pt-5">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-dismissible fade show" role="alert">
+                    {% for category, message in messages %}
+                        <div class="alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Hildot. All rights reserved.</p>
+            <p>
+                <i class="fas fa-phone"></i> <strong>Phone:</strong> +254 712 345 678 |
+                <i class="fas fa-envelope"></i> <strong>Email:</strong> info@sparepartsstore.com
+            </p>
+            <p class="social-icons">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (CDN) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS for Animations -->
+    <script>
+        $(document).ready(function(){
+            // Navbar shadow on scroll
+            $(window).on("scroll", function() {
+                if ($(this).scrollTop() > 50) {
+                    $('.navbar').addClass("scrolled");
+                } else {
+                    $('.navbar').removeClass("scrolled");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

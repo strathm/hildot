@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<!-- Admin Dashboard Section -->
+<section class="admin-dashboard py-5">
+    <div class="container">
+        <h2 class="mb-4">Admin Dashboard</h2>
+
+        <div class="row">
+            <!-- Manage Members -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Manage Members</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Manage members of your SACCO or group.</p>
+                        <a href="{{ url_for('sacco.manage_members', group_id=group.id) }}" class="btn btn-primary btn-block">View Members</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loan Requests -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Loan Requests</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">Approve or reject pending loan requests.</p>
+                        <a href="{{ url_for('admin.view_loan_requests') }}" class="btn btn-warning btn-block">View Loan Requests</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

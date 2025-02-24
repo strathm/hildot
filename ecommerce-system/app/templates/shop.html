@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Shop | All Products{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center">Welcome to Our Shop</h1>
+
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='uploads/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description[:100] }}...</p>
+                        <p class="card-text"><strong>${{ product.price }}</strong></p>
+
+                        <!-- Add to Cart Form -->
+                        {% if product.quantity > 0 %}
+                            <form action="{{ url_for('main.add_to_cart', product_id=product.id) }}" method="POST" class="d-inline">
+                                {{ form.hidden_tag() }} <!-- CSRF token for security -->
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-success">Add to Cart</button>
+                            </form>
+                        {% else %}
+                            <p class="text-danger">Out of Stock</p>
+                        {% endif %}
+
+                        <a href="{{ url_for('main.product_detail', product_id=product.id) }}" class="btn btn-primary ml-2">View Product</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p>No products available for sale at the moment.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

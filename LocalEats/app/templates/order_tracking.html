@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Tracking{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Track Your Order</h2>
+
+    {% if tracking_info %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Order ID: {{ tracking_info.order_id }}</h5>
+                <p class="card-text">Status: <strong>{{ tracking_info.status }}</strong></p>
+                <p class="card-text">Estimated Delivery Time: {{ tracking_info.estimated_delivery_time }}</p>
+                <p class="card-text">Current Location: {{ tracking_info.current_location }}</p>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            Tracking information is currently unavailable.
+        </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('main.home') }}" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}
+

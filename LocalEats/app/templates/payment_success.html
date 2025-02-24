@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5 animate__animated animate__fadeIn">
+    <div class="card shadow-lg p-5" style="border-radius: 20px; background-color: #f9f9f9;">
+        <div class="card-body">
+            <i class="fas fa-check-circle text-success mb-4" style="font-size: 5rem;"></i>
+            <h1 class="text-success">Payment Successful!</h1>
+            <p class="lead mt-3">Thank you for your order. Your payment has been received successfully.</p>
+            <p>We are processing your order, and you will receive an update shortly.</p>
+
+            <div class="mt-4">
+                <a href="{{ url_for('main.home') }}" class="btn btn-primary btn-lg animate__animated animate__pulse animate__infinite">Go to Home</a>
+                <a href="{{ url_for('main.track_order', order_id=order_id) }}" class="btn btn-outline-success btn-lg">Track Your Order</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+sacco_app/
+│── app/
+│   │── __init__.py
+│   │── models.py          # Database models (Users, Groups, Loans, Savings, Transactions, Roles)
+│   │── routes.py          # Routes/Views
+│   │── forms.py           # WTForms for handling input validation
+│   │── utils.py           # Helper functions (e.g., M-Pesa API integration, loan calculations)
+│   │── templates/
+│   │   │── base.html
+│   │   │── index.html
+│   │   │── login.html
+│   │   │── register.html
+│   │   │── dashboard.html
+│   │   │── savings.html
+│   │   │── loans.html
+│   │   │── transactions.html
+│   │   │── admin.html
+│   │── static/
+│       │── css/           # Stylesheets
+│       │── js/            # JavaScript files (e.g., for AJAX requests)
+│       │── images/        # Static images
+│── migrations/            # Database migrations (Flask-Migrate)
+│── config.py              # Configuration settings (Flask, Database, M-Pesa credentials)
+│── requirements.txt       # Dependencies
+│── run.py                 # Entry point of the application
+│── .env                   # Environment variables (e.g., API keys, secret keys)
+│── README.md              # Documentation
+│── tests/                 # Unit and integration tests
+│── docs/                  # Additional documentation (API docs, setup guides)

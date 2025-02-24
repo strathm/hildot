@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to SACCO Web App{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-4">Welcome to SACCO Web App</h1>
+        <p class="lead">The best place to manage your savings and loans</p>
+        <a href="{{ url_for('main.login') }}" class="btn btn-light btn-lg">Login</a>
+        <a href="{{ url_for('main.register') }}" class="btn btn-outline-light btn-lg">Sign Up</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Key Features</h2>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <i class="fas fa-users fa-3x mb-3"></i>
+                <h4>Create and Manage SACCO Groups</h4>
+                <p>Start a new SACCO group or join an existing one to manage your savings and loans.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-piggy-bank fa-3x mb-3"></i>
+                <h4>Save and Earn Interest</h4>
+                <p>Make deposits, earn interest over time, and view your total savings and interest earnings.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-credit-card fa-3x mb-3"></i>
+                <h4>Request and Repay Loans</h4>
+                <p>Request loans with fair interest rates and repay them easily through M-Pesa.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">What Our Users Are Saying</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <p class="card-text">"SACCO Web App has transformed the way I manage my savings and loans. It's so easy to use!"</p>
+                        <h5 class="card-title">John Doe</h5>
+                        <p class="card-text">Sacco Member</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <p class="card-text">"Being part of a SACCO group has helped me save more effectively and take out loans with lower interest rates."</p>
+                        <h5 class="card-title">Jane Smith</h5>
+                        <p class="card-text">Sacco Admin</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <p class="card-text">"The M-Pesa integration makes it so convenient to deposit and withdraw money. A truly seamless experience."</p>
+                        <h5 class="card-title">Samuel Nyambura</h5>
+                        <p class="card-text">Sacco Member</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta py-5 text-center text-white" style="background-color: #343a40;">
+    <div class="container">
+        <h2 class="display-4">Ready to get started?</h2>
+        <p class="lead">Join now and take control of your savings and loans with ease.</p>
+        <a href="{{ url_for('main.register') }}" class="btn btn-light btn-lg">Sign Up Now</a>
+    </div>
+</section>
+
+{% endblock %}

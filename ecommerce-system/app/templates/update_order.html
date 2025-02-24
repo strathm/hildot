@@ -1,0 +1,23 @@
+<!-- templates/admin/update_order.html -->
+{% extends 'base.html' %}
+
+{% block title %}Update Order | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Update Order #{{ order.id }}</h1>
+
+    <form method="POST">
+        <div class="form-group">
+            <label for="status">Order Status</label>
+            <select name="status" class="form-control" id="status">
+                <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                <option value="Paid" {% if order.status == 'Paid' %}selected{% endif %}>Paid</option>
+                <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Status</button>
+    </form>
+</div>
+{% endblock %}

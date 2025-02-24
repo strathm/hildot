@@ -1,0 +1,235 @@
+/* General Styles */
+body {
+    background-color: #f9f9fb;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* Navbar Styles */
+.navbar {
+    background: linear-gradient(135deg, #1d3557, #457b9d);
+    padding: 12px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.4s ease-in-out;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-size: 2rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.1);
+}
+
+/* Align navbar items to the right */
+.navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row-reverse; /* This flips the nav items from right to left */
+    align-items: center;
+    gap: 25px;
+}
+
+.navbar-nav .nav-item {
+    display: inline-block;
+    position: relative;
+    list-style: none;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff !important;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #a8dadc !important;
+    transform: translateY(-2px);
+}
+
+/* Fancy Underline Hover Animation */
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: #a8dadc;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+    background: url('https://via.placeholder.com/1200x500') no-repeat center center/cover;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+}
+
+.hero-section h1 {
+    font-size: 3.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.hero-section p {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+/* Custom Buttons */
+.btn-custom-primary {
+    background-color: #457b9d;
+    color: white;
+    border-radius: 8px;
+    padding: 12px 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.btn-custom-primary:hover {
+    background-color: #1d3557;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-outline-custom {
+    border: 2px solid #457b9d;
+    color: #457b9d;
+    border-radius: 8px;
+    padding: 12px 30px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.btn-outline-custom:hover {
+    background-color: #457b9d;
+    color: white;
+}
+
+/* Card Styles */
+.card-custom {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background-color: #ffffff;
+}
+
+.card-custom:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.18);
+}
+
+.card-custom img {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-custom .card-body {
+    text-align: center;
+    padding: 25px;
+}
+
+.card-custom h5 {
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #1d3557;
+}
+
+/* Footer */
+.footer {
+    background-color: #1d3557;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px;
+    font-size: 0.9rem;
+}
+
+/* Global Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scroll Reveal Animation */
+.scroll-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-fade.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 8px;
+    }
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* General Hover Effects */
+a, button {
+    transition: all 0.3s ease;
+}
+
+a:hover, button:hover {
+    opacity: 0.95;
+}

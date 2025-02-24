@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Receipt - {{ document_number }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Receipt</h2>
+    <p><strong>Receipt Number:</strong> {{ document_number }}</p>
+    <p><strong>Date:</strong> {{ date }}</p>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price (Ksh)</th>
+                <th>Total (Ksh)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in selected_items %}
+            <tr>
+                <td>{{ item.product_name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.quantity * item.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p><strong>Total Amount:</strong> Ksh {{ total_amount }}</p>
+
+    <div class="text-center mt-4">
+        <button onclick="window.print()" class="btn btn-primary">Print Receipt</button>
+    </div>
+</div>
+{% endblock %}

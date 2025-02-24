@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'Receipt' if is_receipt else 'Invoice' }} - {{ document_number }}</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; padding: 20px; }
+        h1 { text-align: center; }
+        .details { margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 8px; text-align: left; }
+        .total { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>{{ 'RECEIPT' if is_receipt else 'INVOICE' }}</h1>
+    <div class="details">
+        <p><strong>Document Number:</strong> {{ document_number }}</p>
+        <p><strong>Date:</strong> {{ date }}</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price (Ksh)</th>
+                <th>Total (Ksh)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product_name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.price * item.quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="total">Grand Total:</td>
+                <td class="total">Ksh {{ total_amount }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <p>Thank you for your business!</p>
+</body>
+</html>

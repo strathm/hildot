@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Invoices & Receipts{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Invoices & Receipts</h2>
+
+    <!-- Search Form -->
+    <form action="{{ url_for('main.search_invoice') }}" method="GET" class="mb-4">
+        <div class="form-group">
+            <label for="document_number">Search by Invoice/Receipt Number (Partial or Full):</label>
+            <input type="text" id="document_number" name="document_number" class="form-control" value="{{ document_number or '' }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+        {% if document_number %}
+        <a href="{{ url_for('main.search_invoice') }}" class="btn btn-secondary">Clear Search</a>
+        {% endif %}
+    </form>
+
+    <!-- Results -->
+    {% if results %}
+    <div class="mt-4">
+        <h4>{% if search_attempted %}Search Results:{% else %}All Invoices & Receipts:{% endif %}</h4>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Document Number</th>
+                    <th>Grand Total (Ksh)</th>
+                    <th>Status</th>
+                    <th>Date Created</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for document in results %}
+                <tr>
+                    <td>{{ document.document_number }}</td>
+                    <td>{{ document.grand_total }}</td>
+                    <td>{{ 'Paid' if document.is_paid else 'Unpaid' }}</td>
+                    <td>{{ document.printed_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>
+                        <a href="{{ url_for('main.view_selected_items', document_number=document.document_number) }}" class="btn btn-info btn-sm">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% elif search_attempted %}
+    <div class="alert alert-warning">
+        No records found for "{{ document_number }}".
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

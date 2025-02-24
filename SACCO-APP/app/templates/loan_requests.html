@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Loan Requests{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Loan Requests</h2>
+
+    {% if loan_requests %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>Member Name</th>
+                        <th>Amount</th>
+                        <th>Interest Rate</th>
+                        <th>Duration (Months)</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in loan_requests %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ request.member_name }}</td>
+                        <td>Ksh {{ request.amount | format_currency }}</td>
+                        <td>{{ request.interest_rate }}%</td>
+                        <td>{{ request.duration }}</td>
+                        <td>
+                            <span class="badge {% if request.status == 'Approved' %}bg-success{% elif request.status == 'Pending' %}bg-warning{% else %}bg-danger{% endif %}">
+                                {{ request.status }}
+                            </span>
+                        </td>
+                        <td>
+                            {% if request.status == 'Pending' %}
+                                <a href="{{ url_for('main.approve_loan', loan_id=request.id) }}" class="btn btn-sm btn-success">Approve</a>
+                                <a href="{{ url_for('main.reject_loan', loan_id=request.id) }}" class="btn btn-sm btn-danger">Reject</a>
+                            {% else %}
+                                <button class="btn btn-sm btn-secondary" disabled>{{ request.status }}</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-center text-muted">No loan requests available.</p>
+    {% endif %}
+</div>
+{% endblock %}

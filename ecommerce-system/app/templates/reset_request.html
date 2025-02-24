@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center section-title">Reset Password</h2>
+    <form method="POST" class="reset-form animate-fade-in">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control") }}
+        </div>
+        
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary btn-block") }}
+        </div>
+    </form>
+</div>
+<!-- Custom Styles -->
+<style>
+    .section-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+    }
+
+    .section-title::after {
+        content: '';
+        width: 60px;
+        height: 4px;
+        background-color: #ffc107;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+    }
+
+    .reset-form {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .reset-form:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+
+    button.btn-primary {
+        background-color: #007bff;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 25px;
+    }
+
+    button.btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    /* Fade-in Animation */
+    .animate-fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUpSmooth 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInUpSmooth {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<!-- End of Custom Styles -->
+{% endblock %}
+

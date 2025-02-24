@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ 'Receipt' if all_paid else 'Invoice' }} - Document {{ document_number }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2>{{ 'Receipt' if all_paid else 'Invoice' }} - Document Number: {{ document_number }}</h2>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price (Ksh)</th>
+                <th>Quantity</th>
+                <th>Subtotal (Ksh)</th>
+                <th class="no-print">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in selected_items %}
+            <tr>
+                <td>{{ item.product_name }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price * item.quantity }}</td>
+                <td class="no-print">{{ 'Paid' if item.is_paid else 'Unpaid' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="1"><strong>Grand Total (Ksh)</strong></td>
+                <td colspan="3"></td>
+                <td><strong>{{ grand_total }}</strong></td>
+                <td class="no-print"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="mt-3">
+        {% if not all_paid %}
+        <form method="POST" style="display:inline;">
+            {{ form.hidden_tag() }}
+            <button type="submit" class="btn btn-success">Mark as Paid</button>
+        </form>
+        {% endif %}
+        <button class="btn btn-secondary" onclick="printAndSave()">
+            Print {{ 'Receipt' if all_paid else 'Invoice' }}
+        </button>
+    </div>
+
+</div>
+
+<!-- Hide Print button, status, and flash messages when printing -->
+<style>
+    @media print {
+        button, form, .alert, .no-print { display: none !important; }
+        body { background: white; }
+    }
+</style>
+
+<script>
+    function printAndSave() {
+        // Print the document
+        window.print();
+
+        // After print, trigger the backend save via URL
+        setTimeout(function () {
+            window.location.href = "{{ url_for('main.view_selected_items', document_number=document_number) }}?save_invoice=1";
+        }, 500);
+    }
+</script>
+
+{% endblock %}

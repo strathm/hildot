@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Stock | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center">Manage Product Stock</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Product Name</th>
+                <th scope="col">Current Stock</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>
+                        <form action="{{ url_for('main.manage_stock') }}" method="POST" class="d-inline">
+                            {{ form.hidden_tag() }}  <!-- CSRF Token (Hidden) -->
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <input type="number" name="quantity" min="1" placeholder="Quantity" required class="form-control d-inline" style="width: 80px;">
+                            <button type="submit" name="action" value="increase" class="btn btn-success">Increase</button>
+                            <button type="submit" name="action" value="decrease" class="btn btn-danger">Decrease</button>
+                        </form>
+
+                        <form action="{{ url_for('main.manage_stock') }}" method="POST" class="d-inline">
+                            {{ form.hidden_tag() }}  <!-- CSRF Token (Hidden) -->
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <button type="submit" name="action" value="delete" class="btn btn-warning">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('main.admin_dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Products That Need Attention{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Products That Need Attention (Low Stock)</h2>
+    {% if low_stock_products %}
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in low_stock_products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.category.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-success">All products are sufficiently stocked.</p>
+    {% endif %}
+
+    <hr>
+
+    <h2>Requested Items from Customers</h2>
+    {% if requested_items %}
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Requested By</th>
+                    <th>Date Requested</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in requested_items %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>{{ item.user.name }}</td>
+                    <td>{{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-success">No items have been requested by customers.</p>
+    {% endif %}
+</div>
+{% endblock %}

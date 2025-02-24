@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Requests | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center">Manage Requests</h1>
+
+    <!-- Flash Messages (Success or Error) -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-info">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Table to display requests -->
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Request Name</th>  
+                <th>Requestor</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests.items %}
+                <tr>
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.name }}</td>  
+                    <td>{{ request.user.username }}</td>  
+                    <td>{{ request.status }}</td>
+                    <td>
+                        <!-- View Request Button -->
+                        <a href="{{ url_for('main.view_request', request_id=request.id) }}" class="btn btn-info btn-sm">View</a>
+                        
+                        <!-- Delete Request Form with CSRF Protection -->
+                        <form action="{{ url_for('main.delete_request', request_id=request.id) }}" method="POST" class="d-inline">
+                            {{ form.hidden_tag() }}  <!-- CSRF Token -->
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this request?');">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination d-flex justify-content-center mt-4">
+        {% if requests.has_prev %}
+            <a href="{{ url_for('main.manage_requests', page=requests.prev_num) }}" class="btn btn-primary mx-1">Previous</a>
+        {% endif %}
+        <span class="align-self-center mx-2">Page {{ requests.page }} of {{ requests.pages }}</span>
+        {% if requests.has_next %}
+            <a href="{{ url_for('main.manage_requests', page=requests.next_num) }}" class="btn btn-primary mx-1">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

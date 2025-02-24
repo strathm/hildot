@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New Product | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Add New Product</h1>
+
+    <!-- Displaying Flash Messages (success or error) -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-info">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Single Product Form -->
+    <h3>Add a Single Product</h3>
+    <form action="{{ url_for('main.add_product') }}" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }} <!-- CSRF token -->
+
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            {{ form.name(class="form-control", id="name", placeholder="Enter product name") }}
+        </div>
+
+        <div class="form-group">
+            <label for="description">Product Description</label>
+            {{ form.description(class="form-control", id="description", rows=4, placeholder="Enter product description") }}
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price</label>
+            {{ form.price(class="form-control", id="price", placeholder="Enter product price") }}
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            {{ form.quantity(class="form-control", id="quantity", placeholder="Enter quantity in stock") }}
+        </div>
+
+        <div class="form-group">
+            <label for="image">Product Image</label>
+            {{ form.image(class="form-control-file", id="image") }}
+        </div>
+
+        <div class="form-group">
+            <label for="category">Select Existing Category</label>
+            {{ form.category_id(class="form-control", id="category") }}
+        </div>
+
+        <div class="form-group">
+            <label for="new_category">Or Create a New Category</label>
+            <input type="text" class="form-control" id="new_category" name="new_category" placeholder="Enter new category name (optional)">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Product</button>
+        <a href="{{ url_for('main.admin_dashboard') }}" class="btn btn-secondary">Back to Products</a>
+    </form>
+
+    <hr>
+
+    <!-- Bulk Upload Section -->
+    <h3>Upload Product List (Bulk Upload)</h3>
+    <form action="{{ url_for('main.upload_bulk_products') }}" method="POST" enctype="multipart/form-data">
+        {{ bulk_upload_form.hidden_tag() }} <!-- CSRF token -->
+
+        <div class="form-group">
+            <label for="file">Upload a .docx or .pdf file</label>
+            <input type="file" class="form-control-file" name="file" id="file" accept=".docx, .pdf" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Upload Products</button>
+    </form>
+</div>
+{% endblock %}

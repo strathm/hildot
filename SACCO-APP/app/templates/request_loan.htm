@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Request Loan{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Request a Loan</h2>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <ul class="mb-0">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Loan Request Form -->
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <i class="fas fa-hand-holding-usd"></i> Loan Request Form
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('main.request_loan') }}">
+                {{ form.hidden_tag() }}
+
+                <div class="mb-3">
+                    {{ form.amount.label(class="form-label") }}
+                    {{ form.amount(class="form-control", placeholder="Enter loan amount") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.repayment_period.label(class="form-label") }}
+                    {{ form.repayment_period(class="form-select") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.purpose.label(class="form-label") }}
+                    {{ form.purpose(class="form-control", placeholder="State purpose of the loan") }}
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">
+                    <i class="fas fa-paper-plane"></i> Submit Loan Request
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

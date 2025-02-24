@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us | TrendMinds Technologies{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center my-4">Get in Touch</h1>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Contact Information</h3>
+            <p><strong>Email:</strong> support@trendmindstech.com</p>
+            <p><strong>Phone:</strong> +254 712 345 678</p>
+            <p><strong>Address:</strong> Nairobi, Kenya</p>
+            <p><strong>Business Hours:</strong> Mon - Fri: 9 AM - 6 PM</p>
+            
+            <!-- Animation: Contact details fade-in -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    let contactInfo = document.querySelectorAll(".col-md-6 p");
+                    contactInfo.forEach((info, index) => {
+                        setTimeout(() => {
+                            info.style.opacity = "1";
+                            info.style.transform = "translateX(0)";
+                        }, index * 300);
+                    });
+                });
+            </script>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Send Us a Message</h3>
+            <form method="POST" action="{{ url_for('main.contact') }}">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.name.label(class="form-label") }}
+                    {{ form.name(class="form-control", placeholder="Your Name") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.email.label(class="form-label") }}
+                    {{ form.email(class="form-control", placeholder="Your Email") }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.message.label(class="form-label") }}
+                    {{ form.message(class="form-control", rows="5", placeholder="Your Message") }}
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12 text-center">
+            <h3>Our Location</h3>
+            <!-- Embedded Google Map -->
+            <iframe 
+                width="100%" height="350" frameborder="0" style="border:0" 
+                src="https://www.google.com/maps/embed/v1/place?q=Nairobi,Kenya&key=YOUR_GOOGLE_MAPS_API_KEY" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</div>
+
+<style>
+    .col-md-6 p {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.5s ease-in-out;
+    }
+</style>
+{% endblock %}

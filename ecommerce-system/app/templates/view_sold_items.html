@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Sold Items Report</h1>
+
+    <form method="get" action="{{ url_for('main.view_sold_items') }}">
+        <label for="filter">View Sold Items By:</label>
+        <select name="filter" id="filter">
+            <option value="day" {% if filter_option == 'day' %}selected{% endif %}>Today</option>
+            <option value="week" {% if filter_option == 'week' %}selected{% endif %}>This Week</option>
+            <option value="month" {% if filter_option == 'month' %}selected{% endif %}>This Month</option>
+            <option value="year" {% if filter_option == 'year' %}selected{% endif %}>This Year</option>
+            <option value="all" {% if filter_option == 'all' %}selected{% endif %}>All Time</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    {% if sold_items %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Date Sold</th>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity Sold</th>
+                    <th>Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in sold_items %}
+                    <tr>
+                        <td>{{ item.date_sold }}</td>
+                        <td>{{ item.product_name }}</td>
+                        <td>{{ item.product_description }}</td>
+                        <td>{{ item.product_price }}</td>
+                        <td>{{ item.quantity_sold }}</td>
+                        <td>{{ item.product_price * item.quantity_sold }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No sold items found for the selected period.</p>
+    {% endif %}
+{% endblock %}

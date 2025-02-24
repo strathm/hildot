@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block title %}Register | Spare Parts and Farm Equipment{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center section-title">Create Your Account</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="/register" method="POST" class="register-form animate-fade-in">
+                <!-- CSRF Token -->
+                {{ form.hidden_tag() }}
+
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="username">Full Name</label>
+                    {{ form.username(class="form-control", placeholder="Enter your full name") }}
+                    {% if form.username.errors %}
+                        <div class="text-danger">
+                            {% for error in form.username.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Email Address -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    {{ form.email(class="form-control", placeholder="Enter your email") }}
+                    {% if form.email.errors %}
+                        <div class="text-danger">
+                            {% for error in form.email.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    {{ form.password(class="form-control", placeholder="Enter your password") }}
+                    {% if form.password.errors %}
+                        <div class="text-danger">
+                            {% for error in form.password.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
+                    {% if form.confirm_password.errors %}
+                        <div class="text-danger">
+                            {% for error in form.confirm_password.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- County -->
+                <div class="form-group">
+                    <label for="county">County</label>
+                    {{ form.county(class="form-control", placeholder="Enter your county") }}
+                    {% if form.county.errors %}
+                        <div class="text-danger">
+                            {% for error in form.county.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Sub-county -->
+                <div class="form-group">
+                    <label for="subcounty">Sub-county</label>
+                    {{ form.subcounty(class="form-control", placeholder="Enter your sub-county") }}
+                    {% if form.subcounty.errors %}
+                        <div class="text-danger">
+                            {% for error in form.subcounty.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Street or Known Area -->
+                <div class="form-group">
+                    <label for="street">Street or Known Area</label>
+                    {{ form.street(class="form-control", placeholder="Enter your street or known area") }}
+                    {% if form.street.errors %}
+                        <div class="text-danger">
+                            {% for error in form.street.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </form>
+
+            <!-- Login Link -->
+            <div class="text-center mt-4">
+                <p>Already have an account? <a href="/login" class="login-link">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Custom Styles -->
+<style>
+    .section-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+    }
+
+    .section-title::after {
+        content: '';
+        width: 60px;
+        height: 4px;
+        background-color: #ffc107;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+    }
+
+    .register-form {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .register-form:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+
+    button.btn-primary {
+        background-color: #007bff;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 25px;
+    }
+
+    button.btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .login-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .login-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Fade-in Animation */
+    .animate-fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUpSmooth 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInUpSmooth {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+{% endblock %}
+

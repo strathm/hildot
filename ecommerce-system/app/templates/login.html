@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | Spare Parts and Farm Equipment{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center section-title">Login to Your Account</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="{{ url_for('main.login') }}" method="POST" class="login-form animate-fade-in">
+                <!-- CSRF Token -->
+                {{ form.hidden_tag() }}
+
+                <!-- Email Address -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    {{ form.email(class="form-control", placeholder="Enter your email") }}
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    {{ form.password(class="form-control", placeholder="Enter your password") }}
+                </div>
+
+                <!-- Remember Me Checkbox -->
+                <div class="form-group form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    <label class="form-check-label" for="remember">Remember Me</label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+                <!-- Forgot Password Link -->
+                <div class="text-center mt-3">
+                    <a href="{{ url_for('main.reset_request') }}" class="forgot-password-link">Forgot Password?</a>
+                </div>
+            </form>
+
+            <!-- Register Link -->
+            <div class="text-center mt-4">
+                <p>Don't have an account? <a href="{{ url_for('main.register') }}" class="register-link">Register here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Custom Styles -->
+<style>
+    .section-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+    }
+
+    .section-title::after {
+        content: '';
+        width: 60px;
+        height: 4px;
+        background-color: #ffc107;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 2px;
+    }
+
+    .login-form {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .login-form:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+
+    button.btn-primary {
+        background-color: #007bff;
+        font-size: 1.1rem;
+        font-weight: bold;
+        border-radius: 25px;
+    }
+
+    button.btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .forgot-password-link, .register-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .forgot-password-link:hover, .register-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Fade-in Animation */
+    .animate-fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUpSmooth 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInUpSmooth {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+{% endblock %}
+
+

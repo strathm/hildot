@@ -1,0 +1,61 @@
+<!-- templates/admin/manage_orders.html -->
+{% extends 'base.html' %}
+
+{% block title %}Manage Orders | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center">Manage Customer Orders</h1>
+
+    <!-- Displaying Flash Messages (success or error) -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-info">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customer.username }}</td>
+                    <td>${{ order.total_price }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>
+                        <form action="/admin/manage-orders" method="POST" class="d-inline">
+                            <input type="hidden" name="order_id" value="{{ order.id }}">
+                            <select name="status" class="form-control d-inline" style="width: 150px;">
+                                <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                                <option value="Paid" {% if order.status == 'Paid' %}selected{% endif %}>Paid</option>
+                                <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+                            </select>
+                            <button type="submit" name="action" value="update_status" class="btn btn-primary ml-2">Update Status</button>
+                        </form>
+                        <a href="/admin/order/{{ order.id }}" class="btn btn-info ml-2">View Order</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+        <a href="/admin/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}My Loans{% endblock %}
+
+{% block content %}
+<!-- Loans Page Section -->
+<section class="loans-section py-5">
+    <div class="container">
+        <h2 class="mb-4">My Loans</h2>
+
+        <!-- Current Loan Information -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Current Loan Status</h5>
+            </div>
+            <div class="card-body">
+                {% if loan %}
+                <p>Loan Amount: <strong>{{ loan.amount }}</strong></p>
+                <p>Amount Paid: <strong>{{ loan.amount_paid }}</strong></p>
+                <p>Remaining Amount: <strong>{{ loan.remaining_amount }}</strong></p>
+                <p>Interest Rate: <strong>{{ loan.interest_rate }}%</strong></p>
+                <p>Repayment Status: <strong>{{ loan.repayment_status }}</strong></p>
+                {% else %}
+                <p>You currently have no active loans.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Request New Loan Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Request a New Loan</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('request_loan') }}">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="form-group">
+                        <label for="amount">Loan Amount</label>
+                        <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter loan amount" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interest_rate">Interest Rate (%)</label>
+                        <input type="number" class="form-control" id="interest_rate" name="interest_rate" placeholder="Enter interest rate" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Request Loan</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Loan Repayment Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Repay Loan</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('pay_loan') }}">
+                    <div class="form-group">
+                        <label for="amount_to_pay">Amount to Repay</label>
+                        <input type="number" class="form-control" id="amount_to_pay" name="amount" placeholder="Enter amount to repay" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Repay Loan</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- M-Pesa Status -->
+        {% if mpesa_status %}
+        <div class="alert alert-info mt-3">
+            <strong>Status:</strong> {{ mpesa_status }}
+        </div>
+        {% endif %}
+        
+        <div class="mt-4">
+            <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

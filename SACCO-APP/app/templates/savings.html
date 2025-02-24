@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}My Savings{% endblock %}
+
+{% block content %}
+<!-- Savings Page Section -->
+<section class="savings-section py-5">
+    <div class="container">
+        <h2 class="mb-4">My Savings</h2>
+
+        <!-- Savings Overview -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Total Savings and Interest</h5>
+            </div>
+            <div class="card-body">
+                <p>Total Savings: <strong>{{ total_savings }}</strong></p>
+                <p>Interest Earned: <strong>{{ interest_earned }}</strong></p>
+                <p>Total Savings with Interest: <strong>{{ total_savings_with_interest }}</strong></p>
+            </div>
+        </div>
+
+        <!-- Add Savings Form -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Add Savings</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('main.savings') }}">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="form-group">
+                        <label for="amount">Amount to Save</label>
+                        <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter amount" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Amount</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- M-Pesa Status -->
+        {% if mpesa_status %}
+        <div class="alert alert-info mt-3">
+            <strong>Status:</strong> {{ mpesa_status }}
+        </div>
+        {% endif %}
+        
+        <div class="mt-4">
+            <a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

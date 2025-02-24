@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Members{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Manage Members</h2>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <ul class="mb-0">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Add Member Form -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <i class="fas fa-user-plus"></i> Add New Member
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('main.add_member') }}">
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            {{ form.name.label(class="form-label") }}
+                            {{ form.name(class="form-control", placeholder="Full Name") }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            {{ form.phone.label(class="form-label") }}
+                            {{ form.phone(class="form-control", placeholder="Phone Number") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            {{ form.national_id.label(class="form-label") }}
+                            {{ form.national_id(class="form-control", placeholder="National ID") }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            {{ form.role.label(class="form-label") }}
+                            {{ form.role(class="form-select") }}
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Add Member</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Members List -->
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <i class="fas fa-users"></i> Members List
+        </div>
+        <div class="card-body">
+            {% if members %}
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>National ID</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for member in members %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ member.name }}</td>
+                                <td>{{ member.phone }}</td>
+                                <td>{{ member.national_id }}</td>
+                                <td>
+                                    <span class="badge {% if member.role == 'Admin' %}bg-primary{% else %}bg-secondary{% endif %}">
+                                        {{ member.role }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('main.edit_member', member_id=member.id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="{{ url_for('main.remove_member', member_id=member.id) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Remove</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-center text-muted">No members found.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

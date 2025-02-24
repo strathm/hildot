@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- Dashboard Section -->
+<section class="dashboard-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="{{ url_for('main.savings') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-piggy-bank"></i> My Savings
+                    </a>
+                    <a href="{{ url_for('main.loans') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-credit-card"></i> My Loans
+                    </a>
+                    <a href="{{ url_for('main.create_sacco') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-users"></i> Create SACCO/Group
+                    </a>
+                    <a href="{{ url_for('main.join_sacco', group_id=current_user.group_id) }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-user-plus"></i> Join SACCO/Group
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <h2 class="mb-4">Welcome, {{ current_user.name }}!</h2>
+
+                <!-- Savings Summary -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Savings Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Total Savings: <strong>{{ total_savings }}</strong></p>
+                        <p>Interest Earned: <strong>{{ interest_earned }}</strong></p>
+                        <a href="{{ url_for('main.savings') }}" class="btn btn-primary">Add Savings</a>
+                    </div>
+                </div>
+
+                <!-- Loan Summary -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Loan Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Loan Amount: <strong>{{ total_loans }}</strong></p>
+                        <p>Repayment Status: <strong>{{ repayment_status }}</strong></p>
+                        <a href="{{ url_for('main.request_loan') }}" class="btn btn-primary">Request Loan</a>
+                    </div>
+                </div>
+
+                <!-- Group/SACCO Information -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">SACCO/Group Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Group Name: <strong>{{ group_name }}</strong></p>
+                        <p>Group Role: <strong>{{ group_role }}</strong></p>
+                        <a href="{{ url_for('main.sacco') }}" class="btn btn-primary">View Group</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

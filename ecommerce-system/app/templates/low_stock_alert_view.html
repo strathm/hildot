@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Low Stock Alert | Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center">Low Stock Alert</h1>
+
+    {% if low_stock_products %}
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Attention! Low Stock Products</h4>
+            <p>These products are running low on stock. Please consider replenishing them as soon as possible.</p>
+            <ul class="list-group">
+                {% for product in low_stock_products %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <strong>{{ product.name }}</strong> 
+                        <span class="badge badge-danger badge-pill">{{ product.quantity }} units left</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">All Products Are Well Stocked</h4>
+            <p>Currently, there are no products with low stock. Keep up the good work!</p>
+        </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="/admin/products" class="btn btn-primary">Manage Products</a>
+        <a href="/admin/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

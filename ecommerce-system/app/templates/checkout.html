@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout | Spare Parts and Farm Equipment{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4 text-center">Checkout</h1>
+
+    {% if cart_items %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Order Summary
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart_items %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>${{ "%.2f"|format(item.product.price) }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ "%.2f"|format(item.total_price) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <h4 class="text-right">Total: ${{ "%.2f"|format(total_amount) }}</h4>
+                </div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <form action="{{ url_for('main.checkout') }}" method="POST">
+                    {{ form.hidden_tag() }}  <!-- CSRF Token -->
+                    <button type="submit" class="btn btn-success">Confirm Order</button>
+                </form>
+                <a href="{{ url_for('main.cart') }}" class="btn btn-secondary mt-2">Back to Cart</a>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="text-center">
+        <p>Your cart is empty. Add items before checking out!</p>
+        <a href="{{ url_for('main.home') }}" class="btn btn-primary">Browse Products</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

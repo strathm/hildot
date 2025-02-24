@@ -1,0 +1,67 @@
+sacco_platform/
+├── backend/                         # Backend (Flask-based)
+│   ├── app/
+│   │   ├── __init__.py              # App initialization
+│   │   ├── config.py                # Configuration (DB, security, etc.)
+│   │   ├── models.py                # MSSQL Database models (Tables for Users, Loans, Transactions, SACCO, etc.)
+│   │   ├── routes/
+│   │   │   ├── auth.py              # Authentication routes (login, registration)
+│   │   │   ├── admin.py             # Admin routes (SACCO management, member management, loan approval)
+│   │   │   ├── member.py            # Member routes (loan application, view status, savings)
+│   │   │   ├── transaction.py       # Transaction routes (M-Pesa integration for payments, withdrawals, deposits)
+│   │   ├── utils/
+│   │   │   ├── mpesa.py             # M-Pesa helper functions (for payments)
+│   │   │   ├── validators.py        # Input validation for various forms (e.g., loan applications)
+│   │   │   ├── security.py          # Encryption, JWT handling for secure communication
+│   │   ├── main.py                  # Entry point for running Flask app
+│   ├── migrations/                  # Database migrations (SQLAlchemy-Alembic)
+│   ├── tests/                       # Backend tests (unit tests for routes and models)
+│   ├── requirements.txt             # Python dependencies
+│   ├── wsgi.py                      # WSGI entry point for deployment (production server)
+│   └── README.md                    # Backend documentation
+│
+├── frontend/                        # Frontend (Flutter-based)
+│   ├── lib/
+│   │   ├── main.dart                # Flutter app entry point
+│   │   ├── screens/                 # UI screens
+│   │   │   ├── login_screen.dart    # Login screen
+│   │   │   ├── admin_dashboard.dart # Admin dashboard (manage SACCO, members, loans)
+│   │   │   ├── member_dashboard.dart # Member dashboard (view savings, loans, earnings)
+│   │   │   ├── transactions.dart    # Transactions screen (deposit, withdrawal, loan payments)
+│   │   │   ├── loan_application.dart # Loan application screen (members apply for loans)
+│   │   │   ├── loan_status.dart     # Loan status screen (view loan status and balance)
+│   │   │   ├── savings.dart         # Savings overview screen (view deposits and interest)
+│   │   │   ├── earnings.dart        # Earnings from interests screen (view interest accumulated)
+│   │   ├── models/                  # Data models (represent user, loan, transaction, savings data)
+│   │   │   ├── user_model.dart      # User model (admin, member)
+│   │   │   ├── loan_model.dart      # Loan model (details of loans: amount, interest, repayment terms)
+│   │   │   ├── transaction_model.dart # Transaction model (deposits, withdrawals, loan payments)
+│   │   │   ├── savings_model.dart   # Savings model (savings balance and interest earned)
+│   │   │   ├── earnings_model.dart  # Earnings model (interest accrued)
+│   │   ├── services/                # API services (handles communication with Flask backend)
+│   │   │   ├── api_service.dart     # API communication (login, register, fetch data)
+│   │   │   ├── mpesa_service.dart   # M-Pesa integration (handle payments)
+│   │   │   ├── loan_service.dart    # Loan related API calls (apply, approve, check status)
+│   │   │   ├── savings_service.dart # Savings related API calls (deposit, withdraw, calculate interest)
+│   │   │   ├── earnings_service.dart # Earnings related API calls (calculate and fetch earnings)
+│   │   ├── widgets/                 # Reusable widgets (UI components)
+│   │   │   ├── custom_button.dart   # Custom button widget
+│   │   │   ├── input_field.dart     # Input field widget
+│   │   │   ├── loan_card.dart       # Loan card widget (view loan details)
+│   │   │   ├── transaction_card.dart # Transaction card widget (view transaction details)
+│   │   │   ├── savings_card.dart    # Savings card widget (view savings details)
+│   │   │   ├── earnings_card.dart   # Earnings card widget (view earnings details)
+│   ├── web/                         # Flutter web-specific files
+│   ├── desktop/                     # Flutter desktop-specific files
+│   ├── pubspec.yaml                 # Flutter dependencies
+│   └── README.md                    # Frontend documentation
+│
+├── scripts/                         # Deployment scripts
+│   ├── docker-compose.yml           # Docker configuration for both frontend and backend
+│   ├── backend.dockerfile           # Dockerfile for backend (Flask)
+│   ├── frontend.dockerfile          # Dockerfile for frontend (Flutter)
+│   ├── init_db.sh                   # MSSQL database initialization script (set up tables and initial data)
+│   ├── deploy.sh                    # Deployment script for the entire application
+│
+├── README.md                        # Overall project documentation
+└── .env                             # Environment variables (e.g., DB credentials, M-Pesa API keys, Flask secret key)

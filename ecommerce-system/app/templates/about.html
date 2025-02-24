@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us | Spare Parts and Farm Equipment{% endblock %}
+
+{% block content %}
+<!-- Add AOS (Animate On Scroll) Library -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+<div class="container my-5">
+    <div class="row align-items-center">
+        <div class="col-md-6 text-center" data-aos="fade-right">
+            <img src="{{ url_for('static', filename='images/about-us.jpg') }}" class="img-fluid rounded shadow" alt="About Us">
+        </div>
+        <div class="col-md-6" data-aos="fade-left">
+            <h2 class="text-primary">Who We Are</h2>
+            <p class="lead">
+                Welcome to <strong>Spare Parts & Farm Equipment</strong>, your trusted destination for high-quality spare parts and agricultural tools. 
+                We are committed to providing durable, affordable, and innovative solutions to farmers and vehicle owners worldwide.
+            </p>
+        </div>
+    </div>
+
+    <div class="row my-5">
+        <div class="col-md-6 order-md-2 text-center" data-aos="fade-left">
+            <img src="{{ url_for('static', filename='images/our-mission.jpg') }}" class="img-fluid rounded shadow" alt="Our Mission">
+        </div>
+        <div class="col-md-6 order-md-1" data-aos="fade-right">
+            <h2 class="text-success">Our Mission</h2>
+            <p class="lead">
+                Our mission is to **empower** farmers and vehicle owners with top-notch spare parts and farming tools. We aim to **increase efficiency, productivity, and sustainability** in the agricultural and automotive industries.
+            </p>
+        </div>
+    </div>
+
+    <div class="row my-5">
+        <div class="col-md-6 text-center" data-aos="fade-up">
+            <img src="{{ url_for('static', filename='images/our-values.jpg') }}" class="img-fluid rounded shadow" alt="Our Values">
+        </div>
+        <div class="col-md-6" data-aos="fade-up">
+            <h2 class="text-warning">Our Values</h2>
+            <ul class="list-unstyled">
+                <li><i class="fas fa-check-circle text-success"></i> **Quality & Durability** – We provide only the best products.</li>
+                <li><i class="fas fa-check-circle text-success"></i> **Customer Satisfaction** – Your needs are our priority.</li>
+                <li><i class="fas fa-check-circle text-success"></i> **Innovation & Growth** – We adapt to new trends and technologies.</li>
+                <li><i class="fas fa-check-circle text-success"></i> **Sustainability** – We care about the environment.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row my-5 text-center" data-aos="zoom-in">
+        <div class="col">
+            <h2 class="text-info">Why Choose Us?</h2>
+            <p class="lead">Here’s why thousands trust us:</p>
+            <div class="row">
+                <div class="col-md-3">
+                    <i class="fas fa-tools fa-3x text-primary"></i>
+                    <h5 class="mt-3">Premium Parts</h5>
+                    <p>Durable & reliable products.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fas fa-shipping-fast fa-3x text-success"></i>
+                    <h5 class="mt-3">Fast Delivery</h5>
+                    <p>Quick shipping for all orders.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fas fa-headset fa-3x text-warning"></i>
+                    <h5 class="mt-3">24/7 Support</h5>
+                    <p>Always here to help you.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fas fa-globe fa-3x text-danger"></i>
+                    <h5 class="mt-3">Global Reach</h5>
+                    <p>Supplying worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-5 text-center" data-aos="fade-up">
+        <div class="col">
+            <h2 class="text-dark">Join Our Community</h2>
+            <p class="lead">Follow us on social media for the latest updates and offers!</p>
+            <div>
+                <a href="#" class="btn btn-primary btn-lg mx-2"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="#" class="btn btn-info btn-lg mx-2"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#" class="btn btn-danger btn-lg mx-2"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="#" class="btn btn-dark btn-lg mx-2"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add AOS (Animate On Scroll) JavaScript -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();  // Initialize animations
+</script>
+
+{% endblock %}

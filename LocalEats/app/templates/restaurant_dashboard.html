@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body { background-color: #f8f9fa; }
+        .dashboard-card { border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease-in-out; }
+        .dashboard-card:hover { transform: translateY(-5px); }
+        .dashboard-header { background-color: #007bff; color: white; border-radius: 15px 15px 0 0; padding: 15px; }
+        .dashboard-content { padding: 20px; }
+        .action-btn { margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="dashboard-header text-center">
+            <h2>Welcome, {{ current_user.name }} - {{ restaurant.name }} Dashboard</h2>
+        </div>
+
+        <div class="row my-4">
+            <div class="col-md-4">
+                <div class="dashboard-card bg-light p-4">
+                    <h5>Manage Menu Items</h5>
+                    <p>Add, Edit, or Remove items from your menu.</p>
+                    <a href="{{ url_for('main.add_menu_item', restaurant_id=restaurant.id) }}" class="btn btn-primary">Add Menu Item</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="dashboard-card bg-light p-4">
+                    <h5>View Orders</h5>
+                    <p>Check ongoing and completed orders.</p>
+                    <a href="#orders-section" class="btn btn-success">View Orders</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="dashboard-card bg-light p-4">
+                    <h5>Edit Restaurant Details</h5>
+                    <p>Update your restaurant's information.</p>
+                    <a href="#" class="btn btn-warning">Edit Details</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-4" id="orders-section">
+            <h3>Recent Orders</h3>
+            {% if orders %}
+                <ul class="list-group">
+                    {% for order in orders %}
+                        <li class="list-group-item">
+                            Order #{{ order.id }} - {{ order.status }}
+                            <div class="float-right">
+                                <a href="#" class="btn btn-info btn-sm action-btn">View</a>
+                                <a href="#" class="btn btn-secondary btn-sm action-btn">Update Status</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No orders yet.</p>
+            {% endif %}
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{{ url_for('main.home') }}" class="btn btn-outline-secondary">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

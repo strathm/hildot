@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-light-gradient">
+    <div class="card login-card border-0 shadow-lg p-5 animate-slide-in">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary-gradient">Welcome Back!</h2>
+            <p class="text-muted">Log in to continue enjoying our fast food delivery service.</p>
+        </div>
+        <form method="POST" action="{{ url_for('main.login') }}">
+            {{ form.hidden_tag() }}
+
+            <div class="form-floating mb-3">
+                {{ form.email(class="form-control", id="floatingEmail", placeholder="Email Address", required="required") }}
+                <label for="floatingEmail"><i class="fas fa-envelope me-2"></i>Email Address</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                {{ form.password(class="form-control", id="floatingPassword", placeholder="Password", required="required") }}
+                <label for="floatingPassword"><i class="fas fa-lock me-2"></i>Password</label>
+            </div>
+
+            <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-primary-gradient btn-lg rounded-pill shadow-sm">Login</button>
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <p class="small">Don't have an account? <a href="{{ url_for('main.register') }}" class="text-decoration-none text-primary-gradient">Sign up here</a></p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Animations */
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-slide-in {
+        animation: slideIn 0.6s ease-out;
+    }
+
+    /* Gradient Background */
+    .bg-light-gradient {
+        background: linear-gradient(135deg, #f9f9fb, #e3eaf8);
+    }
+
+    /* Text Gradient */
+    .text-primary-gradient {
+    background: linear-gradient(45deg, #1d3557, #457b9d);
+    background-clip: text; /* Standard property */
+    -webkit-background-clip: text; /* Webkit-specific */
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+}
+
+    /* Button Gradient */
+    .btn-primary-gradient {
+        background: linear-gradient(to right, #1d3557, #457b9d);
+        color: white;
+        border: none;
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .btn-primary-gradient:hover {
+        background: linear-gradient(to right, #457b9d, #1d3557);
+        transform: translateY(-3px);
+    }
+
+    /* Login Card */
+    .login-card {
+        border-radius: 18px;
+        max-width: 400px;
+        width: 100%;
+        background-color: white;
+    }
+
+    .form-floating label {
+        color: #6c757d;
+    }
+
+    .form-floating .form-control:focus {
+        border-color: #457b9d;
+        box-shadow: 0 0 0 0.2rem rgba(69, 123, 157, 0.25);
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .login-card {
+            padding: 2rem;
+        }
+    }
+</style>
+{% endblock %}
